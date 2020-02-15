@@ -14,7 +14,7 @@ import BScroll from 'better-scroll'
     props:{
       probeType:{
         type:Number,
-        default:null
+        default:0
       },
       pullUpLoad:{
         type:Boolean,
@@ -40,21 +40,26 @@ import BScroll from 'better-scroll'
           // console.log(position);
           this.$emit('scroll',position)         
         })
+        console.log(this.scroll);
 
-        // 3. 监听上拉加载更多
-        this.scroll.on('pullingUp',() => {
-           this.$emit('pullingUp') 
-          console.log('上拉加载更多');
+        // // 3. 监听上拉加载更多
+        // this.scroll.on('pullingUp',() => {
+        //    this.$emit('pullingUp') 
+        //   // console.log('上拉加载更多');
            
-        })
+        // })
 
     },
     methods:{
+      // 回到顶部的
       scrollTo(x,y,time=300){
         this.scroll.scrollTo(x,y,time)
       },
-      finishPullUP(){
-        this.scroll.finishPullUP()
+      // finishPullUp(){
+      //   this.scroll.finishPullUp()
+      // }
+      refresh(){
+        this.scroll.refresh()
       }
     }
   }

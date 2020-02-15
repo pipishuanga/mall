@@ -6,7 +6,8 @@
     </nav-bar>
 
     <!-- 滚动 -->
-    <scroll class="content" ref="scrolls" :probe-type="3" @scroll="centclick" :pull-up-load="true" @pullingUp="pullingUp">
+    <scroll class="content" ref="scroll" :probe-type="3" @scroll="centclick" :pull-up-load="true">
+       <!-- @pullingUp="pullingUp" -->
       <!-- 轮播图 -->
       <home-swiper :banners="banners"></home-swiper>
 
@@ -102,6 +103,12 @@ export default {
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
   },
+  mounted(){
+    // 监听事件
+    this.$bus.$on('imgitemload',() => {
+      this.$refs.scroll.refresh()
+    })
+  },
   methods: {
   
     //  1.  请求的多数据
@@ -122,7 +129,7 @@ export default {
         this.goods[type].page += 1;
 
         //加载完之后必须调用一个方法 刷新 才能接着上拉加载
-        this.$refs.scrolls.finishPullUP()
+        // this.$refs.scroll.finishPullUp()
       });
     },
 
@@ -140,8 +147,8 @@ export default {
       // 点击回到顶部
     backTopclick(){
       // console.log('BACKCLICK');scrollTo
-      console.log(this.$refs.scrolls.message)
-      this.$refs.scrolls.scrollTo(0,0)
+      // console.log(this.$refs.scrolls.message)
+      this.$refs.scroll.scrollTo(0,0)
     },
     // 自定义的事件 切换显示隐藏组件
     centclick(position){
@@ -153,9 +160,10 @@ export default {
       
     },
     // 上拉加载更多
-    pullingUp(){
-      this.getHomeGoods(this.currentType)
-    }
+    // loadMore(){
+    //   this.getHomeGoods(this.currentType)
+    //   // console.log('加载');
+    // }
 
   }
 };
@@ -163,7 +171,7 @@ export default {
 
 <style scoped>
 #home {
-   height: 100vh;
+   /* height: 100vh; */
   position: relative
 }
 .home-nav {
