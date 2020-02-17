@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <router-view></router-view>
-    <main-tab-bar/>
+    <keep-alive> 
+       <!-- keep-alive 组件保留状态，或避免重新渲染 -->
+      <router-view />
+    </keep-alive>
+    <main-tab-bar />
   </div>
 </template>
 
@@ -19,11 +22,11 @@ export default {
 <style>
 @import "./assets/css/base.css";
 /* #app { */
-  /* width: 100vw;
+/* width: 100vw;
   height: 100vh; */
-  /* overflow:hidden */
+/* overflow:hidden */
 
-  /* position: fixed;
+/* position: fixed;
     top: 0;
     bottom: 0;
     width: 100%;
